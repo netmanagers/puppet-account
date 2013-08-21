@@ -1,0 +1,6 @@
+fixtures:
+  repositories:
+    "puppi": "git://github.com/example42/puppi.git"
+  symlinks:
+    "account": "#{source_dir}"
+
