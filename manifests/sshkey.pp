@@ -4,7 +4,7 @@ define account::sshkey (
   $username       = $title,
   $ssh_key        = '',
   $ssh_key_type   = 'ssh-rsa',
-  $ensure         = present,
+  $ensure         = present
 ) {
 
   include account
