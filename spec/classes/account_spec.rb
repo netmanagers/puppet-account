@@ -8,10 +8,18 @@ describe 'account' do
 
   describe 'Test minimal installation' do
     it { should include_class('account::local') }
+    it { should contain_file('home.dir').with_ensure('directory') }
   end
 
   describe 'Test backend ldap' do
     let(:params) { {:backend => "ldap"} }
     it { should include_class('account::ldap') }
+    it { should contain_file('home.dir').with_ensure('directory') }
   end
+
+  describe 'Test noops mode' do
+    let(:params) { {:noops => true} }
+    it { should contain_file('home.dir').with_noop('true') }
+  end
+
 end

@@ -14,26 +14,31 @@
 #
 class account::params {
 
-  # Hash holding users information
-  $users = 'users'
-
-  $home_dir = '/home'
-#  $config_dir = '/etc/skel'
-#  $config_file = ''
-#  $config_dir_mode = '0755'
-#  $config_file_mode = '0644'
-#  $config_file_owner = 'root'
-#  $config_file_group = 'root'
-
   # local, ldap
   $backend = 'local'
 
+  # Default GID to use for users (defaults to 100, "users")
+  # if $primary_group is false
+  $users_gid = '100'
+  $users_groups = ''
+
+  $home_dir = '/home'
+  $home_dir_perms = '0700'
+
+## LDAP backend
+#  $ldap_config_dir = '/etc/skel'
+#  $ldap_config_file = ''
+#  $ldap_config_dir_mode = '0755'
+#  $ldap_config_file_mode = '0644'
+#  $ldap_config_file_owner = 'root'
+#  $ldap_config_file_group = 'root'
+#  $ldap_source = ''
+#  $ldap_source_dir = ''
+#  $ldap_source_dir_purge = false
+#  $ldap_template = ''
+
   # General Settings
   $my_class = ''
-#  $source = ''
-#  $source_dir = ''
-#  $source_dir_purge = false
-#  $template = ''
   $options = ''
   $version = 'present'
   $absent = false
