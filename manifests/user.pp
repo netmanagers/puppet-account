@@ -200,14 +200,12 @@ define account::user(
     mode    => '0700',
   }
 
-  if $ssh_key != undef {
+  if $ssh_key != '' {
     File["${username}_sshdir"]->
-    ssh_authorized_key { $username:
-      ensure  => $ensure,
-      type    => $ssh_key_type,
-      name    => "${username} SSH Key",
-      user    => $username,
-      key     => $ssh_key,
+    account::sshkey { $username:
+      ensure       => $ensure,
+      ssh_key_type => $ssh_key_type,
+      ssh_key      => $ssh_key,
     }
   }
 }
