@@ -23,7 +23,7 @@ describe 'account::sshkey' do
     it do
       should contain_ssh_authorized_key( title ).with({
         'ensure' => 'present',
-        'name'   => "#{params[:username]} SSH Key",
+        'name'   => "#{title} SSH Key",
         'type'   => 'ssh-rsa',
         'key'    => params[:ssh_key],
       })
@@ -43,7 +43,7 @@ describe 'account::sshkey' do
     it do
       should contain_ssh_authorized_key( title ).with({
         'ensure' => 'absent',
-        'name'   => "#{params[:username]} SSH Key",
+        'name'   => "#{title} SSH Key",
         'key'    => params[:ssh_key],
         'type'   => params[:ssh_key_type],
       })

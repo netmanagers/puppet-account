@@ -12,8 +12,8 @@ define account::sshkey (
   if $ssh_key != '' {
     ssh_authorized_key { $title:
       ensure  => $ensure,
+      name    => "${title} SSH Key",
       type    => $ssh_key_type,
-      name    => "${username} SSH Key",
       user    => $username,
       key     => $ssh_key,
     }

@@ -1,5 +1,5 @@
 name    'netmanagers-account'
-version '0.1.0'
+version '0.1.1'
 author  'Javier Bertoli'
 license 'Apache2'
 project_page 'http://www.netmanagers.com'
