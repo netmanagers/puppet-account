@@ -30,6 +30,25 @@ describe 'account::sshkey' do
     end
   end
 
+  describe 'Add user key with other name' do
+    let(:params) do
+      {
+        :username => 'joe',
+        :ssh_key  => 'blablebli',
+        :comment  => 'some new key name',
+      }
+    end
+
+    it do
+      should contain_ssh_authorized_key( title ).with({
+        'ensure' => 'present',
+        'name'   => params[:comment],
+        'type'   => 'ssh-rsa',
+        'key'    => params[:ssh_key],
+      })
+    end
+  end
+
   describe 'Remove user key' do
     let(:params) do
       {
