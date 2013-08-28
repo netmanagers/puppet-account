@@ -118,6 +118,11 @@ define account::user(
     default => $home_dir_perms,
   }
 
+  $real_uid = $uid ? {
+    ''      => undef,
+    default => $uid,
+  }
+
   # We ensure the user has a group
   $real_gid = $gid ? {
     ''      => $account::users_gid,
@@ -166,7 +171,7 @@ define account::user(
       ensure => $ensure,
       name   => $real_primary_group,
       system => $system,
-      gid    => $uid,
+      gid    => $real_uid,
     }
   }
 
@@ -174,7 +179,7 @@ define account::user(
     ensure     => $ensure,
     name       => $username,
     comment    => $comment,
-    uid        => $uid,
+    uid        => $real_uid,
     password   => $password,
     shell      => $shell,
     gid        => $real_primary_group,
