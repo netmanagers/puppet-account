@@ -31,7 +31,7 @@
 # [*noops*]
 #   Set noop metaparameter to true for all the resources managed by the module.
 #   Basically you can run a dryrun for this specific module if you set
-#   this to true. Default: false
+#   this to true. Default: undef
 #
 # Default class params - As defined in account::params.
 # Note that these variables are mostly defined and used in the module itself,
@@ -55,7 +55,6 @@ class account (
 
   $bool_absent=any2bool($absent)
   $bool_audit_only=any2bool($audit_only)
-  $bool_noops=any2bool($noops)
 
   ### Definition of some variables used in the module
   $array_users_groups = is_array($users_groups) ? {
@@ -102,7 +101,7 @@ class account (
     path    => $account::home_dir,
     replace => $account::manage_file_replace,
     audit   => $account::manage_audit,
-    noop    => $account::bool_noops,
+    noop    => $account::noops,
   }
 
   # We include the backend to manage users
