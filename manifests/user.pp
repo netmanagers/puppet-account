@@ -27,7 +27,9 @@
 #
 # [*password*]
 #   The password to set for the user.
-#   The default is to disable the password.
+#   If the account is newly created, the password is left as the system
+#   creates it.
+#   The default is to leave password untouched. 
 #
 # [*shell*]
 #   The user's default login shell.
@@ -129,6 +131,10 @@ define account::user(
     default => $uid,
   }
 
+  $real_password = $password ? {
+    ''      => undef,
+    default => $password,
+  }
   # We ensure the user has a group
   $real_gid = $gid ? {
     ''      => $account::users_gid,
@@ -186,7 +192,7 @@ define account::user(
     name       => $username,
     comment    => $comment,
     uid        => $real_uid,
-    password   => $password,
+    password   => $real_password,
     shell      => $shell,
     gid        => $real_primary_group,
     groups     => $array_groups,
