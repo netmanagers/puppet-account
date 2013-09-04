@@ -49,6 +49,26 @@ describe 'account::sshkey' do
     end
   end
 
+  describe 'Add user key with options' do
+    let(:params) do
+      {
+        :username => 'joe',
+        :ssh_key  => 'blablebli',
+        :options  => [ 'optA=bla', 'optB="some string"'],
+      }
+    end
+
+    it do
+      should contain_ssh_authorized_key( title ).with({
+        'ensure'  => 'present',
+        'name'    => "#{title} SSH Key",
+        'type'    => 'ssh-rsa',
+        'options' => [ 'optA=bla', 'optB="some string"' ],
+        'key'    => params[:ssh_key],
+      })
+    end
+  end
+
   describe 'Remove user key' do
     let(:params) do
       {

@@ -68,6 +68,11 @@
 #   the ssh_authorized_key's 'type' parameter.
 #   Defaults to 'ssh-rsa'.
 #
+# [*ssh_key_options*]
+#   A string or array of options to be added to the SSH Key (like "command=",
+#   etc.) If set to 'undef', no key will be created.
+#   Defaults: empty.
+#
 # [*comment*]
 #   Sets comment metadata for the user
 #
@@ -89,21 +94,22 @@
 # Javier Bertoli <javier@netmanagers.com.ar>
 #
 define account::user(
-  $username       = $title,
-  $password       = '',
-  $shell          = '/bin/bash',
-  $manage_home    = true,
-  $home_dir       = '',
-  $home_dir_perms = '',
-  $create_group   = true,
-  $system         = false,
-  $uid            = '',
-  $ssh_key        = '',
-  $ssh_key_type   = 'ssh-rsa',
-  $groups         = '',
-  $ensure         = 'present',
-  $comment        = "${title} Puppet-managed User",
-  $gid            = ''
+  $username        = $title,
+  $password        = '',
+  $shell           = '/bin/bash',
+  $manage_home     = true,
+  $home_dir        = '',
+  $home_dir_perms  = '',
+  $create_group    = true,
+  $system          = false,
+  $uid             = '',
+  $ssh_key         = '',
+  $ssh_key_type    = 'ssh-rsa',
+  $ssh_key_options = '',
+  $groups          = '',
+  $ensure          = 'present',
+  $comment         = "${title} Puppet-managed User",
+  $gid             = ''
 ) {
 
   include account
@@ -211,6 +217,7 @@ define account::user(
       ensure       => $ensure,
       ssh_key_type => $ssh_key_type,
       ssh_key      => $ssh_key,
+      options      => $ssh_key_options,
     }
   }
 }
