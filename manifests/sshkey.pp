@@ -24,7 +24,7 @@ define account::sshkey (
     default => $comment,
   }
 
-  if $ssh_key != '' {
+  if $ensure != absent and $ssh_key != '' {
     ssh_authorized_key { $title:
       ensure  => $ensure,
       name    => $ssh_key_comment,

@@ -19,6 +19,9 @@ This module requires the presence of Example42 Puppi module in your modulepath.
 
         class { 'account': }
 
+  This just enables the class, checks for the users' homedir to exist and loads the 
+  desired backend (currently only local accounts).
+
 * Install a specific version of account package
 
         class { 'account':
@@ -45,31 +48,7 @@ This module requires the presence of Example42 Puppi module in your modulepath.
 
 
 ## USAGE - Overrides and Customizations
-* Use custom sources for main config file
-
-        class { 'account':
-          source => [ "puppet:///modules/netmanagers/account/account.conf-${hostname}" , "puppet:///modules/example42/account/account.conf" ], 
-        }
-
-
-* Use custom source directory for the whole configuration dir
-        class { 'account':
-          source_dir       => 'puppet:///modules/netmanagers/account/conf/',
-          source_dir_purge => false, # Set to true to purge any existing file not present in $source_dir
-        }
-
-* Use custom template for main config file. Note that template and source arguments are alternative.
-
-        class { 'account':
-          template => 'netmanagers/account/account.conf.erb',
-        }
-
-* Automatically include a custom subclass
-
-        class { 'account':
-          my_class => 'example42::my_account',
-        }
-
+This module provides some defines to manage users, their SSH keys and 
 
 
 ## TESTING
