@@ -1,6 +1,7 @@
 fixtures:
   repositories:
     "puppi": "git://github.com/example42/puppi.git"
+    "stdlib":   "https://github.com/puppetlabs/puppetlabs-stdlib.git"
   symlinks:
     "account": "#{source_dir}"
 

@@ -24,16 +24,16 @@ define account::sshkey (
     default => $comment,
   }
 
-  if $ensure != absent and $ssh_key != '' {
-    ssh_authorized_key { $title:
-      ensure  => $ensure,
-      name    => $ssh_key_comment,
-      type    => $ssh_key_type,
-      user    => $username,
-      key     => $ssh_key,
-      options => $array_options,
-    }
-  } else {
+  if $ensure == present and $ssh_key == '' {
     err( "Invalid value given for ssh-key. Can't be empty." )
+  }
+
+  ssh_authorized_key { $title:
+    ensure  => $ensure,
+    name    => $ssh_key_comment,
+    type    => $ssh_key_type,
+    user    => $username,
+    key     => $ssh_key,
+    options => $array_options,
   }
 }
